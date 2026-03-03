@@ -92,7 +92,7 @@ INDEX=$(mongosh --host $MONGODB_HOST  --quiet --eval 'db.getMongo().getDBNames()
 VALIDATE  $? "Load Master Data"
 
 if [ $INDEX -le 0 ]; then
-    mongosh --host $MONGODB_HOST </app/db/master-data.js   &>>$LOG_FILE
+    mongosh --host $MONGODB_HOST </app/db/master-data.js   
     VALIDATE  $? "Loading products"
 else
     echo -e "Product is arelady loaded $Y... skipping $N"
