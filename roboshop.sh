@@ -32,10 +32,7 @@ do
           --query 'Reservations[].Instances[].PrivateIpAddress' \
           --output text 
         )
-
-     
-        
-      fi
+    fi
       
  
 
