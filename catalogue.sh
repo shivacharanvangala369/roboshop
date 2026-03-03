@@ -100,6 +100,5 @@ fi
 
 
 
-
 systemctl restart catalogue     &>>$LOG_FILE
 VALIDATE  $? "restarting catalouge services"
