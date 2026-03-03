@@ -87,8 +87,6 @@ VALIDATE  $? "copying mongorepo"
 dnf install mongodb-mongosh -y    &>>$LOG_FILE
 VALIDATE  $? "installing mogo-client"
 
-INDEX=$(mongosh --host mongodb.devcops.online  )
-
 
 INDEX=$(mongosh --host $MONGODB_HOST --eval --quiet 'db.getMongo().getDBNames().indexof("mydb")')  &>>$LOG_FILE
 VALIDATE  $? "Load Master Data"
