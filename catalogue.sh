@@ -48,6 +48,10 @@ fi
 
 
 
+
+rm -r /app/*   &>>$LOG_FILE
+VALIDATE  $? "removeing app dir in /"
+
 mkdir -p /app  &>>$LOG_FILE
 VALIDATE  $? "creating app dir in / "
 
