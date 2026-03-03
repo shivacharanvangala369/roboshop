@@ -27,7 +27,7 @@ VALIDATE(){
 dnf install golang -y  &>>$LOG_FILE
 VALIDATE  $? "install golang"
 
-useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop  &>>$LOG_FILE
+useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
 VALIDATE  $? "create user"
 
 rm -rf /app/*   &>>$LOG_FILE
