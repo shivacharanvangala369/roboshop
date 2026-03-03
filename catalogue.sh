@@ -67,9 +67,11 @@ npm install      &>>$LOG_FILE
 VALIDATE  $? "installing dependencies"
 
 
+cp catalogue.service /etc/systemd/system/catalogue.service &>>$LOG_FILE
+VALIDATE  $? "copying catalogue service"
 
 systemctl daemon-reload    &>>$LOG_FILE
-VALIDATE  $? "daemon-reload "
+VALIDATE  $? "daemon-reload"
 
 systemctl enable catalogue    &>>$LOG_FILE
 systemctl start catalogue     &>>$LOG_FILE
