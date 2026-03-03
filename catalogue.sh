@@ -46,10 +46,7 @@ else
     echo -e "Roboshop user alraedy exist...$Y SKIPPLNG $N"
 fi
 
-
-
-
-rm -r /app/*   &>>$LOG_FILE
+rm -rf /app/*   &>>$LOG_FILE
 VALIDATE  $? "removeing app dir in /"
 
 mkdir -p /app  &>>$LOG_FILE
