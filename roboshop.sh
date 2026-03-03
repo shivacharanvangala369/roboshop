@@ -23,7 +23,7 @@ do
             --query 'Reservations[].Instances[].PublicIpAddress' \
             --output text 
           )
-        RECORD_NAME="$DOMAIN_NAME"
+          RECORD_NAME="$DOMAIN_NAME"
 
       
     else
@@ -33,7 +33,7 @@ do
             --query 'Reservations[].Instances[].PrivateIpAddress' \
             --output text 
           )
-        RECORD_NAME="$instance.$DOMAIN_NAME"
+          RECORD_NAME="$instance.$DOMAIN_NAME"
     fi
 
     echo "IP Address: $IP"
