@@ -45,9 +45,9 @@ unzip /tmp/frontend.zip      &>>$LOG_FILE
 VALIDATE  $? "unzipping frontend"
 
 
-cp nginx.conf /etc/nginx/nginx.conf      &>>$LOG_FILE
+cp $SCRIPT_DIR/nginx.conf /etc/nginx/nginx.conf      &>>$LOG_FILE
 VALIDATE  $? "copying conf file"
 
 
 systemctl restart nginx       &>>$LOG_FILE
-VALIDATE  $? "module disable nodejs"
+VALIDATE  $? "restart  nginx"
