@@ -8,7 +8,7 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[34m"
 SCRIPT_DIR=$PWD
-MONGODB_HOST="mongodb.devcops.online"
+MONGODB_HOST=mongodb.devcops.online
 
 if [ $USERID -ne 0 ]; then
      echo -e "$R please run this script using root user" | tee -a $LOG_FILE
@@ -88,12 +88,12 @@ dnf install mongodb-mongosh -y    &>>$LOG_FILE
 VALIDATE  $? "installing mogo-client"
 
 
-INDEX=$(mongosh --host $MONGODB_HOST --eval --quiet 'db.getMongo().getDBNames().indexof("mydb")')  &>>$LOG_FILE
+INDEX=$(mongosh --host $MONGODB_HOST --eval --quiet 'db.getMongo().getDBNames().indexof("catalogue")')  &>>$LOG_FILE
 VALIDATE  $? "Load Master Data"
 
 if [ $INDEX -le 0 ]; then
-    mongosh --host $MONGODB_HOST   &>>$LOG_FILE
-    VALIDATE  $? "check data is loaded into mongodb or not Connect to MongoDB"
+    mongosh --host $MONGODB_HOST </app/db/master-data.js   &>>$LOG_FILE
+    VALIDATE  $? "Loading products"
 else
     echo -e "Product is arelady loaded $Y... skipping $N"
 if
