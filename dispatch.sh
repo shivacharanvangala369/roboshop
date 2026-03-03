@@ -54,7 +54,7 @@ go build  &>>$LOG_FILE
 VALIDATE  $? "go mod init, get, build"
 
 
-cp   $SCRIPT_DIR/dispatch.service /etc/systemd/system/dispatch.service &>>$LOG_FILE
+cp   $SCRIPT_DIR/dispatch.service /etc/systemd/system/dispatch.service 
 VALIDATE  $? "copy service files"
 
 

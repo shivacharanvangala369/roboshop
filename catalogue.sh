@@ -48,8 +48,7 @@ else
     echo -e "Roboshop user alraedy exist...$Y SKIPPLNG $N"
 fi
 
-rm -rf /app/*   &>>$LOG_FILE
-VALIDATE  $? "removeing app dir in /"
+
 
 mkdir -p /app  &>>$LOG_FILE
 VALIDATE  $? "creating app dir in / "
@@ -59,6 +58,11 @@ curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue
 VALIDATE  $? "downloading source code"
 
 cd /app                      &>>$LOG_FILE
+
+rm -rf /app/*   &>>$LOG_FILE
+VALIDATE  $? "removeing app dir in /"
+
+
 unzip /tmp/catalogue.zip    &>>$LOG_FILE
 VALIDATE  $? "unzipping source code"
 
@@ -69,7 +73,7 @@ npm install      &>>$LOG_FILE
 VALIDATE  $? "installing dependencies"
 
 
-cp $SCRIPT_DIR/catalogue.service /etc/systemd/system/catalogue.service &>>$LOG_FILE
+cp $SCRIPT_DIR/catalogue.service /etc/systemd/system/catalogue.service 
 VALIDATE  $? "copying catalogue service"
 
 systemctl daemon-reload    &>>$LOG_FILE
@@ -79,7 +83,7 @@ systemctl enable catalogue    &>>$LOG_FILE
 systemctl start catalogue     &>>$LOG_FILE
 VALIDATE  $? "enable and starting catalouge services"
 
-cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOG_FILE  
+cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo  
 VALIDATE  $? "copying mongorepo"
 
 

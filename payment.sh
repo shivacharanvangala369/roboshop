@@ -38,14 +38,17 @@ else
     echo -e "Roboshop user alraedy exist...$Y SKIPPLNG $N"
 fi
 
-rm -rf /app/*   &>>$LOG_FILE
-VALIDATE  $? "removeing app dir in /"
+
 
 mkdir -p /app 
 
 
 curl -L -o /tmp/payment.zip https://roboshop-artifacts.s3.amazonaws.com/payment-v3.zip   &>>$LOG_FILE
 cd /app 
+
+rm -rf /app/*   &>>$LOG_FILE
+VALIDATE  $? "removeing app dir in /"
+
 unzip /tmp/payment.zip  &>>$LOG_FILE
 VALIDATE  $? "downloading and zip the code"
 
@@ -55,7 +58,7 @@ pip3 install -r requirements.txt  &>>$LOG_FILE
 VALIDATE  $? "pip3 install"
 
 
-cp $SCRIPT_DIR/payment.service /etc/systemd/system/payment.service &>>$LOG_FILE
+cp $SCRIPT_DIR/payment.service /etc/systemd/system/payment.service 
 VALIDATE  $? "copying service files"
 
 systemctl daemon-reload &>>$LOG_FILE

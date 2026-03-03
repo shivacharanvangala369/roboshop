@@ -48,8 +48,7 @@ else
     echo -e "Roboshop cart alraedy exist...$Y SKIPPLNG $N"
 fi
 
-rm -rf /app/*   &>>$LOG_FILE
-VALIDATE  $? "removeing app dir in /"
+
 
 mkdir -p /app  &>>$LOG_FILE
 VALIDATE  $? "creating app dir in / "
@@ -57,6 +56,9 @@ VALIDATE  $? "creating app dir in / "
 
 curl -o /tmp/cart.zip https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip   &>>$LOG_FILE
 VALIDATE  $? "downloading source code"
+
+rm -rf /app/*   &>>$LOG_FILE
+VALIDATE  $? "removeing app dir in /"
 
 cd /app                      &>>$LOG_FILE
 unzip /tmp/cart.zip    &>>$LOG_FILE
@@ -69,7 +71,7 @@ npm install      &>>$LOG_FILE
 VALIDATE  $? "installing dependencies"
 
 
-cp $SCRIPT_DIR/cart.service /etc/systemd/system/cart.service &>>$LOG_FILE
+cp $SCRIPT_DIR/cart.service /etc/systemd/system/cart.service 
 VALIDATE  $? "copying cart service"
 
 systemctl daemon-reload    &>>$LOG_FILE

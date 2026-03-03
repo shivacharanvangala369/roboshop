@@ -38,8 +38,7 @@ else
 fi
 
 
-rm -rf /app/*   &>>$LOG_FILE
-VALIDATE  $? "removeing app dir in /"
+
 
 mkdir -p /app    &>>$LOG_FILE
 
@@ -48,6 +47,10 @@ VALIDATE  $? "create app dir"
 
 curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip    &>>$LOG_FILE
 cd /app    &>>$LOG_FILE
+
+rm -rf /app/*   &>>$LOG_FILE
+VALIDATE  $? "removeing app dir in /"
+
 unzip /tmp/shipping.zip    &>>$LOG_FILE
 VALIDATE  $? "download and unzip the code"
 
@@ -60,7 +63,7 @@ VALIDATE  $? "build the package"
 
 
 
-cp  $SCRIPT_DIR/shipping.service  /etc/systemd/system/shipping.service       &>>$LOG_FILE
+cp  $SCRIPT_DIR/shipping.service  /etc/systemd/system/shipping.service       
 VALIDATE  $? "cpying the shipping service file"
  
   
@@ -70,9 +73,6 @@ VALIDATE  $? "daemon-reload "
 
 
 
-systemctl enable shipping      &>>$LOG_FILE
-systemctl start shipping        &>>$LOG_FILE
-VALIDATE  $? "enable and start shipping"
 
 
 
@@ -94,4 +94,6 @@ else
 fi
 
 
-systemctl restart shipping     &>>$LOG_FILE
+systemctl enable shipping      &>>$LOG_FILE
+systemctl start shipping        &>>$LOG_FILE
+VALIDATE  $? "enable and start shipping"
