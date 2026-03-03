@@ -88,7 +88,7 @@ dnf install mongodb-mongosh -y    &>>$LOG_FILE
 VALIDATE  $? "installing mogo-client"
 
 
-INDEX=$(mongosh --host $MONGODB_HOST --eval --quiet 'db.getMongo().getDBNames().indexof("catalogue")')  &>>$LOG_FILE
+INDEX=$(mongosh --host $MONGODB_HOST  --quiet --eval 'db.getMongo().getDBNames().indexof("catalogue")')  &>>$LOG_FILE
 VALIDATE  $? "Load Master Data"
 
 if [ $INDEX -le 0 ]; then
@@ -97,6 +97,8 @@ if [ $INDEX -le 0 ]; then
 else
     echo -e "Product is arelady loaded $Y... skipping $N"
 if
+
+
 
 systemctl restart catalogue     &>>$LOG_FILE
 VALIDATE  $? "restarting catalouge services"
