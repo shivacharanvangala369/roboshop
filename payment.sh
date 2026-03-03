@@ -30,8 +30,13 @@ VALIDATE(){
 dnf install python3 gcc python3-devel -y  &>>$LOG_FILE
 VALIDATE  $? "install python3"
 
-useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop  &>>$LOG_FILE
-VALIDATE  $? "craeteing user"
+id roboshop &>>$LOG_FILE
+if [ $? -ne 0 ]; then
+    useradd --system --home /app --shell /sbin/nologin  --comment "roboshop system user" roboshop &>>$LOG_FILE
+    VALIDATE $? "Adding roboshop as system user"
+else
+    echo -e "Roboshop user alraedy exist...$Y SKIPPLNG $N"
+fi
 
 rm -rf /app/*   &>>$LOG_FILE
 VALIDATE  $? "removeing app dir in /"
