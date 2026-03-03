@@ -8,6 +8,7 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[34m"
 SCRIPT_DIR=$PWD
+MYSQL_HOST=mysql.devcops.online
 
 if [ $USERID -ne 0 ]; then
      echo -e "$R please run this script using root user" | tee -a $LOG_FILE
@@ -81,14 +82,14 @@ dnf install mysql -y      &>>$LOG_FILE
 
 
 
-mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pRoboShop@1 < /app/db/schema.sql
+mysql -h $MYSQL_HOST -uroot -pRoboShop@1 < /app/db/schema.sql
 
 
-mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pRoboShop@1 < /app/db/app-user.sql 
+mysql -h $MYSQL_HOST -uroot -pRoboShop@1 < /app/db/app-user.sql 
 
 
 
-mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pRoboShop@1 < /app/db/master-data.sql
+mysql -h $MYSQL_HOST -uroot -pRoboShop@1 < /app/db/master-data.sql
 
 
 
