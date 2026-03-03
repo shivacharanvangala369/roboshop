@@ -7,6 +7,7 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[34m"
+SCRIPT_DIR=$PWD
 
 if [ $USERID -ne 0 ]; then
      echo -e "$R please run this script using root user" | tee -a $LOG_FILE
@@ -67,7 +68,7 @@ npm install      &>>$LOG_FILE
 VALIDATE  $? "installing dependencies"
 
 
-cp catalogue.service /etc/systemd/system/catalogue.service &>>$LOG_FILE
+cp $SCRIPT_DIR/catalogue.service /etc/systemd/system/catalogue.service &>>$LOG_FILE
 VALIDATE  $? "copying catalogue service"
 
 systemctl daemon-reload    &>>$LOG_FILE
@@ -77,7 +78,7 @@ systemctl enable catalogue    &>>$LOG_FILE
 systemctl start catalogue     &>>$LOG_FILE
 VALIDATE  $? "enable and starting catalouge services"
 
-cp mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOG_FILE  
+cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOG_FILE  
 VALIDATE  $? "copying mongorepo"
 
 
