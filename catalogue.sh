@@ -8,6 +8,7 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[34m"
 SCRIPT_DIR=$PWD
+MONGODB_HOST="mongodb.devcops.online"
 
 if [ $USERID -ne 0 ]; then
      echo -e "$R please run this script using root user" | tee -a $LOG_FILE
@@ -86,9 +87,18 @@ VALIDATE  $? "copying mongorepo"
 dnf install mongodb-mongosh -y    &>>$LOG_FILE
 VALIDATE  $? "installing mogo-client"
 
+INDEX=$(mongosh --host mongodb.devcops.online  )
 
-mongosh --host mongodb.devcops.online </app/db/master-data.js    &>>$LOG_FILE
+
+INDEX=$(mongosh --host $MONGODB_HOST --eval --quiet 'db.getMongo().getDBNames().indexof("mydb")')  &>>$LOG_FILE
 VALIDATE  $? "Load Master Data"
 
-mongosh --host mongodb.devcops.online   &>>$LOG_FILE
-VALIDATE  $? "check data is loaded into mongodb or not Connect to MongoDB"
+if [ $INDEX -le 0 ]; then
+    mongosh --host $MONGODB_HOST   &>>$LOG_FILE
+    VALIDATE  $? "check data is loaded into mongodb or not Connect to MongoDB"
+else
+    echo -e "Product is arelady loaded $Y... skipping $N"
+if
+
+systemctl restart catalogue     &>>$LOG_FILE
+VALIDATE  $? "restarting catalouge services"
