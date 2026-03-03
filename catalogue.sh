@@ -88,24 +88,16 @@ dnf install mongodb-mongosh -y    &>>$LOG_FILE
 VALIDATE  $? "installing mogo-client"
 
 
-#INDEX=$(mongosh --host $MONGODB_HOST  --quiet --eval 'db.getMongo().getDBNames().indexof("catalogue")')  &>>$LOG_FILE
-#VALIDATE  $? "Load Master Data"
-
-#if [ $INDEX -le 0 ]; then
-#    mongosh --host $MONGODB_HOST </app/db/master-data.js   &>>$LOG_FILE
-#    VALIDATE  $? "Loading products"
-#else
-#    echo -e "Product is arelady loaded $Y... skipping $N"
-#if
-
-INDEX=$(mongosh --host $MONGODB_HOST --quiet  --eval 'db.getMongo().getDBNames().indexOf("catalogue")')
+INDEX=$(mongosh --host $MONGODB_HOST  --quiet --eval 'db.getMongo().getDBNames().indexof("catalogue")')  &>>$LOG_FILE
+VALIDATE  $? "Load Master Data"
 
 if [ $INDEX -le 0 ]; then
-    mongosh --host $MONGODB_HOST </app/db/master-data.js
-    VALIDATE $? "Loading products"
+    mongosh --host $MONGODB_HOST </app/db/master-data.js   &>>$LOG_FILE
+    VALIDATE  $? "Loading products"
 else
-    echo -e "Products already loaded ... $Y SKIPPING $N"
+    echo -e "Product is arelady loaded $Y... skipping $N"
 fi
+
 
 
 
