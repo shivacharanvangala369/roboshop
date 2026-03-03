@@ -7,6 +7,7 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[34m"
+SCRIPT_DIR=$PWD
 
 if [ $USERID -ne 0 ]; then
      echo -e "$R please run this script using root user" | tee -a $LOG_FILE
@@ -22,3 +23,18 @@ VALIDATE(){
         echo -e "$2... $G SUCCESS" | tee -a $LOG_FILE
     fi
 }
+
+
+cp $SCRIPT_DIR/rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo
+
+
+dnf install rabbitmq-server -y
+
+
+systemctl enable rabbitmq-server
+systemctl start rabbitmq-server
+
+
+rabbitmqctl add_user roboshop roboshop123
+rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
+
