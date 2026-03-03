@@ -33,7 +33,7 @@ systemctl enable nginx           &>>$LOG_FILE
 systemctl start nginx             &>>$LOG_FILE
 VALIDATE  $? "enable and start nginx"
 
-rm -rf /usr/share/nginx/html/*         &>>$LOG_FILE
+rm -rf /usr/share/nginx/html/*        
 VALIDATE  $? "removing content in html"
 
 curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip    &>>$LOG_FILE
@@ -44,6 +44,7 @@ cd /usr/share/nginx/html    &>>$LOG_FILE
 unzip /tmp/frontend.zip      &>>$LOG_FILE
 VALIDATE  $? "unzipping frontend"
 
+rm -rf /etc/nginx/nginx.conf
 
 cp $SCRIPT_DIR/nginx.conf /etc/nginx/nginx.conf      &>>$LOG_FILE
 VALIDATE  $? "copying conf file"
