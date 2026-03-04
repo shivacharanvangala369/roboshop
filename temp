@@ -31,7 +31,7 @@ echo "record updated for $instance"
 
 
 
-mongo,user,cart -- no health_check
+mongo,user,cart,shipping -- no health_check
 
 
 
