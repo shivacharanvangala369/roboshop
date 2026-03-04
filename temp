@@ -26,6 +26,15 @@
 
 echo "record updated for $instance"
 
+
+
+
+
+
+mongo -- no health_check
+
+
+
   RECORD_NAME="$instance.$DOMAIN_NAME"
 
   RECORD_NAME="$DOMAIN_NAME"
