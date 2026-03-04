@@ -48,9 +48,6 @@ else
     echo -e "Roboshop user alraedy exist...$Y SKIPPLNG $N"
 fi
 
-rm -rf /app/*   &>>$LOG_FILE
-VALIDATE  $? "removeing app dir in /"
-
 mkdir -p /app  &>>$LOG_FILE
 VALIDATE  $? "creating app dir in / "
 
@@ -59,6 +56,10 @@ curl -o /tmp/user.zip https://roboshop-artifacts.s3.amazonaws.com/user-v3.zip   
 VALIDATE  $? "downloading source code"
 
 cd /app                      &>>$LOG_FILE
+
+rm -rf /app/*   &>>$LOG_FILE
+VALIDATE  $? "removeing app dir in /"
+
 unzip /tmp/user.zip    &>>$LOG_FILE
 VALIDATE  $? "unzipping source code"
 
