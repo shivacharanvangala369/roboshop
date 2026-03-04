@@ -57,10 +57,14 @@ VALIDATE  $? "creating app dir in / "
 curl -o /tmp/cart.zip https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip   &>>$LOG_FILE
 VALIDATE  $? "downloading source code"
 
+
+
+cd /app                      &>>$LOG_FILE
+
 rm -rf /app/*   &>>$LOG_FILE
 VALIDATE  $? "removeing app dir in /"
 
-cd /app                      &>>$LOG_FILE
+
 unzip /tmp/cart.zip    &>>$LOG_FILE
 VALIDATE  $? "unzipping source code"
 
