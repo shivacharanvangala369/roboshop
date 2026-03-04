@@ -44,6 +44,11 @@ VALIDATE  $? "create a ap dir"
 
 curl -L -o /tmp/dispatch.zip https://roboshop-artifacts.s3.amazonaws.com/dispatch-v3.zip  &>>$LOG_FILE
 cd /app 
+
+rm -rf /app/*   &>>$LOG_FILE
+VALIDATE  $? "removeing app dir in /"
+
+
 unzip /tmp/dispatch.zip  &>>$LOG_FILE
 VALIDATE  $? "download unzip the code"
  
