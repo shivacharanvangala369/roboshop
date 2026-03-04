@@ -71,6 +71,10 @@ systemctl daemon-reload     &>>$LOG_FILE
 
 VALIDATE  $? "daemon-reload "
 
+systemctl enable shipping      &>>$LOG_FILE
+systemctl start shipping        &>>$LOG_FILE
+VALIDATE  $? "enable and start shipping"
+
 
 
 
@@ -94,6 +98,6 @@ else
 fi
 
 
-systemctl enable shipping      &>>$LOG_FILE
-systemctl start shipping        &>>$LOG_FILE
-VALIDATE  $? "enable and start shipping"
+
+systemctl restart shipping        &>>$LOG_FILE
+VALIDATE  $? "restart shipping"
