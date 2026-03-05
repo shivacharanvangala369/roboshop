@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cartID=$(id -u)
+USERID=$(id -u)
 LOG_FOLDER="/var/log/roboshop"
 LOG_FILE="$LOG_FOLDER/$0.log"
 R="\e[31m"
